@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pindah ke Apa Kabar Udara</title>
+<meta name="robots" content="noindex">
+<meta http-equiv="refresh" content="3;url=https://apakabarudara.github.io/">
+<style>body{font:500 17px/1.5 system-ui,sans-serif;background:#F6F1EA;color:#261F27;margin:0;display:grid;place-items:center;min-height:100vh;padding:24px;text-align:center}a{color:#6B4E71;font-weight:700}</style>
+</head>
+<body>
+<p>Apa Kabar Udara pindah ke alamat baru.<br><a id="go" href="https://apakabarudara.github.io/">apakabarudara.github.io</a></p>
+<script>
+// Keep the city link (#palembang) and query, drop the old service worker and caches, then move on.
+const to = 'https://apakabarudara.github.io/' + location.search + location.hash;
+document.getElementById('go').href = to;
+(async () => {
+  try {
+    for (const r of await navigator.serviceWorker.getRegistrations()) await r.unregister();
+    for (const k of await caches.keys()) await caches.delete(k);
+  } catch (e) { /* nothing to clean */ }
+  location.replace(to);
+})();
+</script>
+</body>
+</html>
